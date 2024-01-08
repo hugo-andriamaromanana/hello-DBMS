@@ -90,9 +90,13 @@ SET
     position = 'Senior Software Engineer'
 WHERE
     employee_id = 2315;
+
 --7.
-DELETE FROM Employees
-WHERE employee_id = 3533;
+DELETE FROM
+    Employees
+WHERE
+    employee_id = 3533;
+
 --8.
 SELECT
     first_name,
@@ -100,6 +104,7 @@ SELECT
     position
 FROM
     Employees;
+
 --9.
 SELECT
     Employees.first_name,
@@ -108,8 +113,8 @@ SELECT
     Departments.location
 FROM
     Employees
-JOIN
-    Departments ON Employees.department_id = Departments.department_id;
+    JOIN Departments ON Employees.department_id = Departments.department_id;
+
 --10.
 SELECT
     Departments.department_name,
@@ -117,24 +122,65 @@ SELECT
     Employees.last_name AS manager_last_name
 FROM
     Departments
-LEFT JOIN
-    Employees ON Departments.department_head = Employees.employee_id
+    LEFT JOIN Employees ON Departments.department_head = Employees.employee_id
 ORDER BY
     Departments.department_name;
---11.
-INSERT INTO Departments (department_id, department_name, location)
-VALUES
-    (4, 'Marketing', 'Branch Office South')
-ON DUPLICATE KEY UPDATE
-    department_name = VALUES(department_name), location = VALUES(location);
 
-INSERT INTO Employees (employee_id, first_name, last_name, birthdate, position, department_id)
+--11.
+INSERT INTO
+    Departments (department_id, department_name, location)
 VALUES
-    (21, 'Natalie', 'Johnson', '1992-04-15', 'Marketing Specialist', 4),
-    (22, 'Christopher', 'Moore', '1988-11-28', 'Marketing Manager', 4)
-ON DUPLICATE KEY UPDATE
-    first_name = VALUES(first_name), last_name = VALUES(last_name),
-    birthdate = VALUES(birthdate), position = VALUES(position), department_id = VALUES(department_id);
+    (4, 'Marketing', 'Branch Office South') ON DUPLICATE KEY
+UPDATE
+    department_name =
+VALUES
+(department_name),
+    location =
+VALUES
+(location);
+
+INSERT INTO
+    Employees (
+        employee_id,
+        first_name,
+        last_name,
+        birthdate,
+        position,
+        department_id
+    )
+VALUES
+    (
+        21,
+        'Natalie',
+        'Johnson',
+        '1992-04-15',
+        'Marketing Specialist',
+        4
+    ),
+    (
+        22,
+        'Christopher',
+        'Moore',
+        '1988-11-28',
+        'Marketing Manager',
+        4
+    ) ON DUPLICATE KEY
+UPDATE
+    first_name =
+VALUES
+(first_name),
+    last_name =
+VALUES
+(last_name),
+    birthdate =
+VALUES
+(birthdate),
+    position =
+VALUES
+(position),
+    department_id =
+VALUES
+(department_id);
 
 --12.
 CREATE TABLE IF NOT EXISTS Projects (
@@ -146,7 +192,14 @@ CREATE TABLE IF NOT EXISTS Projects (
     FOREIGN KEY (department_id) REFERENCES Departments(department_id)
 );
 
-INSERT INTO Projects (project_id, project_name, start_date, end_date, department_id)
+INSERT INTO
+    Projects (
+        project_id,
+        project_name,
+        start_date,
+        end_date,
+        department_id
+    )
 VALUES
     (1, 'ProjectA', '2022-01-01', '2022-02-01', 1),
     (2, 'ProjectB', '2022-02-15', '2022-03-15', 1),
