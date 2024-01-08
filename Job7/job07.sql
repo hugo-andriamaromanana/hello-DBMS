@@ -62,8 +62,56 @@ FROM
     JOIN eteam ON game.team1 = eteam.id
 WHERE
     eteam.coach = 'Fernando Santos';
+
 -- 8.
-SELECT goal.matchid, goal.player
-FROM goal
-JOIN game ON goal.matchid = game.id
-WHERE game.stadium = 'National Stadium, Warsaw';
+SELECT
+    goal.matchid,
+    goal.player
+FROM
+    goal
+    JOIN game ON goal.matchid = game.id
+WHERE
+    game.stadium = 'National Stadium, Warsaw';
+
+--9.
+SELECT
+    goal.matchid,
+    goal.player
+FROM
+    goal
+    JOIN game ON goal.matchid = game.id
+WHERE
+    game.stadium = 'National Stadium, Warsaw';
+
+--10.
+SELECT
+    teamid,
+    COUNT(*) as total_goals
+FROM
+    goal
+GROUP BY
+    teamid;
+
+-- 11.
+SELECT
+    game.stadium,
+    COUNT(*) as total_goals
+FROM
+    game
+    JOIN goal ON game.id = goal.matchid
+GROUP BY
+    game.stadium;
+
+--12.
+SELECT
+    game.id as match_id,
+    game.mdate as match_date,
+    COUNT(*) as goals_scored
+FROM
+    game
+    JOIN goal ON game.id = goal.matchid
+WHERE
+    goal.teamid = 'FRA'
+GROUP BY
+    game.id,
+    game.mdate;
